@@ -29,8 +29,9 @@ int main(int argc,char **argv)
 	cout<<player1.size()<<" "<<player2.size()<<endl;
 	for(int i=0;i<26;i++)
 		cout<<player1[i]->description()<<" "<<player2[i]->description()<<endl;
-	//while(!(player1.empty() || player2.empty()))
-	//{
+	int step_couter=0;
+	while((player1.size()>0 && player2.size()>0))
+	{
 		if((*player1[0]).compare((player2[0]))==win)
 			{
 				(player1).push_back(player2[0]);
@@ -40,11 +41,34 @@ int main(int argc,char **argv)
 			{
 				(player2).push_back(player1[0]);
 				player1.erase(player1.begin());
-			}
-				
-			//else
-			//	for(int i=1;i<=player1.size();i++)
-			//		if((*player1[i]).compare((player2[i]))!=)
-	//}
+			}//dotad dziala bez remisu
+			else//it's a trap
+				for(int i=1;i<=player1.size() && i<=player2.size();i++)
+					{
+						if((*player1[i]).compare((player2[i]))!=draw)
+						{
+							if((*player1[i]).compare((player2[i]))==win)
+								{
+									int how_many_to_delete=i;
+									for(;i>=0;i--)
+										player1.push_back(player2[i]);
+										player1.erase(player2.begin(),player2.begin()+how_many_to_delete);
+								}
+								else 
+								{
+									int how_many_to_delete=i;
+									for(;i>=0;i--)
+										player2.push_back(player1[i]);
+										player2.erase(player1.begin(),player1.begin()+how_many_to_delete);
+								}
+						}
+						break;
+					}
+		cout<<++step_couter<<" ";
+
+	}
+	cout<<endl;
+	if(player1.empty())cout<<"player2 has won"<<" in "<<step_couter<<" steps"<<endl;
+	if(player2.empty())cout<<"player1 has won"<<" in "<<step_couter<<" steps"<<endl;
 	
 }
