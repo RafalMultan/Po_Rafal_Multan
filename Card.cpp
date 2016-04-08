@@ -12,7 +12,9 @@ string Card::description()
 	static char figures[]="234567890JQKA";
 	return string(1,colours[colour])+string(1,figures[figure]);
 }
-result Card::compare(Card *)
+result Card::compare(Card *w)
 {
-	return win;
+	if((this->figure)<(w->figure))return lose;
+	else if((this->figure)>(w->figure))return win;
+	else return draw;
 }
