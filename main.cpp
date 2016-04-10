@@ -36,35 +36,56 @@ int main(int argc,char **argv)
 			{
 				(player1).push_back(player2[0]);
 				player2.erase(player2.begin());
+				player1.push_back(player1[0]);
+				player1.erase(player1.begin());
+				cout<<"w"<<player1.size()<<" "<<player2.size()<<endl;
 			}
 			else if((*player1[0]).compare((player2[0]))==lose)
 			{
 				(player2).push_back(player1[0]);
 				player1.erase(player1.begin());
-			}//dotad dziala bez remisu
-			else//it's a trap
-				for(int i=1;i<=player1.size() && i<=player2.size();i++)
+				player2.push_back(player2[0]);
+				player2.erase(player2.begin());
+				cout<<"l"<<player1.size()<<" "<<player2.size()<<endl;
+			}
+			else
+				for(int i=0;i<player1.size() && i<player2.size();i++)
 					{
 						if((*player1[i]).compare((player2[i]))!=draw)
 						{
 							if((*player1[i]).compare((player2[i]))==win)
 								{
+									cout<<"dw";
 									int how_many_to_delete=i;
 									for(;i>=0;i--)
-										player1.push_back(player2[i]);
-										player1.erase(player2.begin(),player2.begin()+how_many_to_delete);
+										{
+											player1.push_back(player2[i]);
+											player1.push_back(player1[i]);
+										}
+										player2.erase(player2.begin(),player2.begin()+how_many_to_delete+1);
+										player1.erase(player1.begin(),player1.begin()+how_many_to_delete+1);	
+										cout<<player1.size()<<" "<<player2.size()<<endl;	
+										break;
 								}
 								else 
 								{
+									cout<<"dl";
 									int how_many_to_delete=i;
 									for(;i>=0;i--)
-										player2.push_back(player1[i]);
-										player2.erase(player1.begin(),player1.begin()+how_many_to_delete);
+										{
+											player2.push_back(player1[i]);
+											player2.push_back(player2[i]);
+										}
+										player1.erase(player1.begin(),player1.begin()+how_many_to_delete+1);
+										player2.erase(player2.begin(),player2.begin()+how_many_to_delete+1);
+										cout<<player1.size()<<" "<<player2.size()<<endl;
+										break;
 								}
+								
 						}
-						break;
+						
 					}
-		cout<<++step_couter<<" ";
+		++step_couter;
 
 	}
 	cout<<endl;
