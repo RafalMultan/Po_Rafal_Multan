@@ -49,7 +49,7 @@ int main(int argc,char **argv)
 				cout<<"l"<<player1.size()<<" "<<player2.size()<<endl;
 			}
 			else
-				for(int i=0;i<player1.size() && i<player2.size();i++)
+				for(int i=0;i<player1.size() && i<player2.size();i+=2)
 					{
 						if((*player1[i]).compare((player2[i]))!=draw)
 						{
